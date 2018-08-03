@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+'use strict';
+
 var path = require('path')
 var fs = require('fs')
 var fse = require('fs-extra')
