@@ -1,6 +1,6 @@
 {
   "name": "bazi",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/myxvisual/bazi#readme",
   "dependencies": {
     "chalk": "^2.4.1",
-    "commander": "^2.16.0"
+    "commander": "^2.16.0",
+    "fs-extra": "^7.0.0"
   }
 }

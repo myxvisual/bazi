@@ -1,5 +1,5 @@
 {
-  "setupTemplate": "react-boilerplate",
+  "setupRepository": "react-boilerplate",
   "repositoryUrls": ["git@gitlab.com:myxvisual/react-boilerplate.git"],
   "replaceKeyword": "react-boilerplate"
 }
