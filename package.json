@@ -1,6 +1,6 @@
 {
   "name": "bazi",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=4.0"
+  },
   "bugs": {
     "url": "https://github.com/myxvisual/bazi/issues"
   },
