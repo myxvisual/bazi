@@ -20,13 +20,14 @@ var config = JSON.parse(fs.readFileSync(
   fs.existsSync(chachedConfigFile) ? chachedConfigFile : originConfigFile
 ))
 var repositoryReg = /\/(.+)\.git/
+var hadUpdateRepository = false
 
 program
   .version('0.1.0', '-v, --version')
   .arguments('<project-directory>')
   .usage(`${chalk.green('<project-directory>')} [options]`)
   .option('-s, --setup-repository <repositoryUrl>', 'setup custom repository', setupRepositoryUrl)
-  .option('-u, --update-repository <repositoryName>', 'update custom repository by folder name', updateRepository)
+  .option('-u, --update-repository [repositoryName]', 'update custom repository by folder name', updateRepository)
   .option('-k, --keyword-to-replace <keyword>', 'set replace keyword to repositorys', setKeyword)
   .option('-l, --ls', 'list the repositories', listRepositorys)
   .option('-d, --default', 'set config to default', setConfigDefault)
@@ -38,6 +39,10 @@ program
 init()
 console.log(chalk.green(`current setup repository is: ${config.setupRepository}`))
 program.parse(argv)
+
+if (program.updateRepository && !hadUpdateRepository) {
+  updateRepository(config.setupRepository)
+}
 
 function init() {
   var repositoryUrls = config.repositoryUrls
@@ -123,7 +128,9 @@ function setupRepositoryUrl(repositoryUrlOrName) {
 }
 
 function updateRepository(repositoryName) {
+  hadUpdateRepository = true
   if (fs.existsSync(`../repositorys/${repositoryName}`)) {
+    console.log(chalk.green(`updating repository: ${repositoryName}`))
     execSync(`cd ../repositorys/${repositoryName} && git pull`)
   } else {
     console.log(chalk.red(`repository: ${repositoryName} dosen't exist`))
