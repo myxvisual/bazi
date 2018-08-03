@@ -32,10 +32,10 @@ program
   .option('-d, --default', 'set config to default', setConfigDefault)
   .action(name => {
     projectName = name
-    init()
     cloneRepositroyFolder()
   })
   
+init()
 console.log(chalk.green(`current setup repository is: ${config.setupRepository}`))
 program.parse(argv)
 
@@ -50,7 +50,6 @@ function init() {
           // console.log(`repository: ${repositoryName} is existed.`)
         } else {
           console.log(chalk.red(`repository: ${repositoryName} dosen't exist`))
-          console.log(chalk.green(`clone repository ${repositoryName}...` ))
           execSync(`cd ../repositorys && git clone ${repositoryUrl}`)
         }
       }
