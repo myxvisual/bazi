@@ -36,7 +36,6 @@ program
     cloneRepositoriesFolder()
   })
   
-init()
 console.log(chalk.green(`current setup repository is: ${config.setupRepository}`))
 program.parse(argv)
 
@@ -44,7 +43,7 @@ if (program.updateRepository && !hadUpdateRepository) {
   updateRepository(config.setupRepository)
 }
 
-function init() {
+function initRepository() {
   var repositoryUrls = config.repositoryUrls
   if (!fs.existsSync('../repositories')) {
     fs.mkdirSync('../repositories')
@@ -56,7 +55,7 @@ function init() {
         var isExist = fs.existsSync(`../repositories/${repositoryName}`)
         if (isExist) {
           console.log(`repository: ${repositoryName} is existed.`)
-          fs.unlinkSync(`../repositories/${repositoryName}`)
+          fse.emptyDirSync(`../repositories/${repositoryName}`)
         } else {
           console.log(chalk.red(`repository: ${repositoryName} dosen't exist`))
         }
@@ -129,6 +128,7 @@ function setupRepositoryUrl(repositoryUrlOrName) {
     console.log(chalk.green(`setup repositoryName: ${repositoryName}`))
     writeConfigFile()
   }
+  initRepository()
 }
 
 function updateRepository(repositoryName) {
